@@ -1,6 +1,6 @@
 package com.codurance.dip;
 
-public interface SendGreeter {
+public interface Greeter {
 
     void sendGreetings();
 }

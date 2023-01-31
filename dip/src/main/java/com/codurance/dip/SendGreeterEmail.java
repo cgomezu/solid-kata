@@ -2,7 +2,7 @@ package com.codurance.dip;
 
 import java.time.MonthDay;
 
-public class SendGreeterEmail implements SendGreeter {
+public class SendGreeterEmail implements Greeter {
 
     private final Clock clock;
     private final EmployeeRepository employeeRepository;

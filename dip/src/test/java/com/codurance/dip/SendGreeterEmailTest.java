@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BirthdayGreeterShould {
+public class SendGreeterEmailTest {
     private static final int CURRENT_MONTH = 7;
     private static final int CURRENT_DAY_OF_MONTH = 9;
     private static final MonthDay TODAY = MonthDay.of(CURRENT_MONTH, CURRENT_DAY_OF_MONTH);
@@ -27,10 +27,10 @@ public class BirthdayGreeterShould {
     private Clock clock;
 
     @InjectMocks
-    private BirthdayGreeter birthdayGreeter;
+    private SendGreeterEmail birthdayGreeter;
 
 
-    private ByteArrayOutputStream consoleContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream consoleContent = new ByteArrayOutputStream();
 
     @Test
     public void should_send_greeting_email_to_employee() {
@@ -39,7 +39,7 @@ public class BirthdayGreeterShould {
         Employee employee = anEmployee().build();
         given(employeeRepository.findEmployeesBornOn(MonthDay.of(CURRENT_MONTH, CURRENT_DAY_OF_MONTH))).willReturn(Collections.singletonList(employee));
 
-        birthdayGreeter.send();
+        birthdayGreeter.sendGreetings();
 
         String actual = consoleContent.toString();
         assertThat(actual)

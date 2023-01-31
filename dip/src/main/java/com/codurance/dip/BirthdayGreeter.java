@@ -1,14 +1,14 @@
 package com.codurance.dip;
 
 public class BirthdayGreeter {
-    private final SendGreeter sendGreeter;
+    private final Greeter greeter;
 
-    public BirthdayGreeter(SendGreeter sendGreeter) {
-        this.sendGreeter = sendGreeter;
+    public BirthdayGreeter(Greeter greeter) {
+        this.greeter = greeter;
     }
 
     public void send() {
-        sendGreeter.sendGreetings();
+        greeter.sendGreetings();
     }
 
 
