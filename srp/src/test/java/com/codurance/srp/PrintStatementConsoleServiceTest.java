@@ -12,16 +12,12 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AccountServiceShould {
+public class PrintStatementConsoleServiceTest {
 
-    private static final int POSITIVE_AMOUNT = 100;
-    private static final int NEGATIVE_AMOUNT = -POSITIVE_AMOUNT;
     private static final LocalDate TODAY = LocalDate.of(2017, 9, 6);
     private static final List<Transaction> TRANSACTIONS = Arrays.asList(
         new Transaction(LocalDate.of(2014, 4, 1), 1000),
@@ -38,31 +34,14 @@ public class AccountServiceShould {
     @Mock
     private Console console;
 
-    private AccountService accountService;
+    private PrintStatementConsoleService accountService;
 
     @Before
     public void setUp() {
-        accountService = new AccountService(transactionRepository, clock, console);
+        accountService = new PrintStatementConsoleService(transactionRepository, console);
         given(clock.today()).willReturn(TODAY);
     }
 
-
-    @Test
-    public void deposit_amount_into_the_account() {
-
-        accountService.deposit(POSITIVE_AMOUNT);
-
-        verify(transactionRepository).add(refEq(new Transaction(TODAY, POSITIVE_AMOUNT)));
-    }
-
-
-    @Test
-    public void withdraw_amount_from_the_account() {
-
-        accountService.withdraw(POSITIVE_AMOUNT);
-
-        verify(transactionRepository).add(refEq(new Transaction(TODAY, NEGATIVE_AMOUNT)));
-    }
 
     @Test
     public void print_statement() {

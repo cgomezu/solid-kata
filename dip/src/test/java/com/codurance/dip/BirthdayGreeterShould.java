@@ -39,7 +39,7 @@ public class BirthdayGreeterShould {
         Employee employee = anEmployee().build();
         given(employeeRepository.findEmployeesBornOn(MonthDay.of(CURRENT_MONTH, CURRENT_DAY_OF_MONTH))).willReturn(Collections.singletonList(employee));
 
-        birthdayGreeter.sendGreetings();
+        birthdayGreeter.send();
 
         String actual = consoleContent.toString();
         assertThat(actual)
